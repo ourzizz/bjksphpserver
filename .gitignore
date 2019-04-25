@@ -5,3 +5,4 @@ database.php
 *.swp
 ./application/logs/*.log
 ./application/business/*.json
+./learn/*
