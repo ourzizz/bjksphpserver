@@ -47,14 +47,14 @@ class Upload extends CI_Controller {
             foreach ($bucketsDetail as $bucket) {
                 array_push($bucketNames, explode('-', $bucket['Name'])[0]);
             }
-
+            //var_dump($bucketNames);
             // 若不存在 bucket 就创建 bucket
-            if (count($bucketNames) === 0 || !in_array($bucketName, $bucketNames)) {
-                $cosClient->createBucket([
-                    'Bucket' => $bucketName,
-                    'ACL' => 'public-read'
-                ])->toArray();
-            }
+            //if (count($bucketNames) === 0 || !in_array($bucketName, $bucketNames)) {
+                //$cosClient->createBucket([
+                    //'Bucket' => $bucketName,
+                    //'ACL' => 'public-read'
+                //])->toArray();
+            //}
 
             // 上传文件
             $fileFolder = $folderName ? $folderName . '/' : '';

@@ -31,40 +31,35 @@ class Conf {
     private static $Key = '';
     private static $CertPath = '';
     private static $KeyPath = '';
+    private static $NotifyUrl = '';
     // 微信小程序 AppSecret
-    private static $UseQcloudLogin = true;
+    //private static $UseQcloudLogin = true;
+    private static $UseQcloudLogin = false;
     
     // 数据库配置信息
     private static $Mysql = [
-        'host' => 'localhost',
-        'port' => 3306,
-        'user' => 'root',
-        'db'   => 'cAuth',
-        'pass' => '',
-        'char' => 'utf8mb4'
     ];
     
     // COS 配置信息
     private static $Cos = [
-        'region' => 'cn-south',
-        'fileBucket' => 'qcloudtest',
-        'uploadFolder' => '/data/wwwroot/default/public/images/upload',
-        'maxSize' => 5,
-        'field' => 'file'
+        //'region' => 'cn-north',
+        //'fileBucket' => 'bandao',
+        //'uploadFolder' => '/data/wwwroot/default/public/images/upload/',
+        //'maxSize' => 5,
+        //'field' => 'file'
     ];
 
     // 当前使用 SDK 服务器的主机，该主机需要外网可访问
-    private static $ServerHost = '58.87.119.233';
+    private static $ServerHost = '';
     //private static $ServerHost = 'www.alemao.club';
 
     // 信道服务器服务地址
-    private static $TunnelServerUrl = 'https://tunnel.ws.qcloud.la';
-
+    private static $TunnelServerUrl = ''; 
     // 和信道服务器通信的签名密钥，该密钥需要保密
-    private static $TunnelSignatureKey = 'sdfsdfsdfsdfjk';
+    private static $TunnelSignatureKey = '';
 
     // 腾讯云 AppID
-    private static $QcloudAppId = 123456789;
+    private static $QcloudAppId = 10172592;
     
     // 腾讯云 QcloudSecretId
     private static $QcloudSecretId = '';

@@ -38,5 +38,15 @@ class Login extends CI_Controller {
         }
         $this->json($row);
     }
+
+    public function get_role(){
+        $open_id = $_POST['openId'];
+        $row = DB::row('seller',['role'],['open_id' => $open_id]);
+        if(!$row){
+            $this->json(['role'=>'NULL']);
+            return ;
+        }
+        $this->json($row);
+    }
 }
 

@@ -58,7 +58,8 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array();
+//$autoload['libraries'] = array(); //原始 不配置会有CI框架提示Undefined property: XXX::$db错误
+$autoload['libraries'] = array('database');
 
 /*
 | -------------------------------------------------------------------

@@ -4,6 +4,7 @@
  * 这个模型只管理对goods这个表的增删改
  * @author qxnbd
  */
+use \QCloud_WeApp_SDK\Mysql\Mysql as DB;
 class Shopcart_model extends CI_Model {
     public function __construct() {
         $this->load->database();
@@ -61,10 +62,13 @@ class Shopcart_model extends CI_Model {
     public function insert_user_chose_goods($open_id,$goods_id) {
         //如果数据库中已经存在这条记录，那么只需要增加它的数目,插入的数量不能大于最大库存
         $goods_in_db = $this->is_goods_exsit_in_user_cart($open_id,$goods_id);
+        $type = (DB::row('goods',['type'],['goods_id'=>$goods_id]))->type;
         if($goods_in_db == NULL) {//res为空 不存在 直接加入
             $query = $this->db->query(sprintf("INSERT INTO shop_cart (`cart_id`, `timestrap`, `count`, `open_id`, `goods_id`) VALUES (NULL, now(), 1, '%s', '%s')",$open_id,$goods_id));
             return true;
-        }else{//goods已经存在，进行自增
+        }elseif($type === 'ele'){//购物车中已经有该电子书了 直接返回false
+            return false;
+        } else{//goods已经存在，进行自增
             return  $this->add_count($open_id,$goods_id);
         }
     }
@@ -74,7 +78,7 @@ class Shopcart_model extends CI_Model {
         return $query->result_array();
     }
     public function select_user_has_goods($open_id) {
-        $query = $this->db->query(sprintf("SELECT shop_cart.open_id,shop_cart.count,shop_cart.timestrap,goods.name,goods.price,goods.goods_id,goods.face_img,goods.remain from goods,shop_cart WHERE goods.goods_id = shop_cart.goods_id and shop_cart.open_id = '%s' ",$open_id));
+        $query = $this->db->query(sprintf("SELECT shop_cart.open_id,shop_cart.count,shop_cart.timestrap,goods.name,goods.price,goods.goods_id,goods.face_img,goods.remain,goods.danwei,goods.type from goods,shop_cart WHERE goods.goods_id = shop_cart.goods_id and shop_cart.open_id = '%s' ",$open_id));
         return $query->result_array();
     }
 

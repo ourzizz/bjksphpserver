@@ -1,5 +1,0 @@
-计算数组长度:count
-数组添加元素 array_push($a,"blue","yellow");
-    $a=array("red","green");
-    array_push($a,"blue","yellow");
-    print_r($a); 

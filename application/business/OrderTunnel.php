@@ -28,7 +28,7 @@ class OrderTunnel{
         foreach($rows as $tid){
             array_push($connectedTunnelIds,$tid->tunnelId);
         }
-        $type = 'refund';
+        $type = 'order';
         $content = ['order_id'=>$order_id];
         $result = TunnelService::broadcast($connectedTunnelIds, $type, $content);
     }

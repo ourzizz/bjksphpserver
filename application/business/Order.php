@@ -39,11 +39,11 @@ class Order{
         $order = DB::row('user_order',['*'],"order_id='$order_id'");
         if(isset($order)) {
             $address = DB::row('user_address',['*'],"address_id='$order->address_id'");
-            $goods_list = DB::select('goods_in_order',['*'],"order_id='$order_id'");
+            $goods_list = DB::select('goods_in_order',['*'],['order_id'=>$order_id]);
             foreach($goods_list as &$goods){
                 $goods_id = $goods->goods_id;
-                $goods_info = DB::select('goods',['name','face_img','price'],"goods_id='$goods_id'");
-                $goods = array_merge((array)($goods),(array)($goods_info[0]));
+                $goods_info = DB::row('goods',['name','face_img','price','danwei'],['goods_id'=>$goods_id]);
+                $goods = array_merge((array)($goods),(array)($goods_info));
             }
             $res = compact('order','address','goods_list');
             return $res;

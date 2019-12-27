@@ -3,6 +3,6 @@ config.php
 database.php
 *.sow
 *.swp
-./application/logs/*.log
+*.log
 ./application/business/*.json
 ./learn/*

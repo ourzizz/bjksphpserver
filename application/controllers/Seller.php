@@ -24,8 +24,8 @@
  * 商家退款后 
  * 将seller_act 置为CANCLE
  * 退款refund_status W等待退款，F完成退款，R拒绝退款
- * *//*}}}
  */
+
 use \QCloud_WeApp_SDK\Auth\LoginService as LoginService;
 use \QCloud_WeApp_SDK\Mysql\Mysql as DB;
 use \QCloud_WeApp_SDK\Conf as Conf;
@@ -56,8 +56,9 @@ class Seller extends CI_Controller {
     }
 
     /**
-     *取出还没有接单的订单发给商家
-     * @example 小程序前端给过来的order_info的json格式{'open_id':'xx','goods_list':[{'goods_id':1,'count':1}...],'total_fee':3300,'address_id':1}
+     *取出还没有接单的订单发给商家(其商家态为WAIT_PICK)
+     *在支付回调页面将订单商家态置WAIT_PICK
+     *货到付款应该在user-order页面存储订单同时设置
      */
     public function get_wait_pick_orders(){
         if($this->checkLogin()){
@@ -71,6 +72,9 @@ class Seller extends CI_Controller {
         }
     }
 
+    /*
+     *取出捡单的单子，因为需要知道是那个捡单员配的单子，所以要open_id
+     * */
     public function get_assemble_orders(){
         $open_id = $_POST['open_id'];
         $conditions = "seller_act='ASSEMBLE' AND open_id= '$open_id'";
@@ -83,8 +87,7 @@ class Seller extends CI_Controller {
     }
 
     /**
-     *取出还没有发货的单子
-     * @example 小程序前端给过来的order_info的json格式{'open_id':'xx','goods_list':[{'goods_id':1,'count':1}...],'total_fee':3300,'address_id':1}
+     *取出等待退款的单子
      */
     public function get_wait_refund_orders(){
         if($this->checkLogin()){
@@ -100,7 +103,6 @@ class Seller extends CI_Controller {
 
     /**
      *取出还没有发货的单子
-     * @example 小程序前端给过来的order_info的json格式{'open_id':'xx','goods_list':[{'goods_id':1,'count':1}...],'total_fee':3300,'address_id':1}
      */
     public function get_delivery_orders(){
         if($this->checkLogin()){

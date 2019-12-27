@@ -1,4 +1,5 @@
 <?php
+namespace QCloud_WeApp_SDK\Myapi;
 class WeixinPay {
     protected $appid;
     protected $mch_id;
@@ -7,7 +8,7 @@ class WeixinPay {
     protected $out_trade_no;
     protected $body;
     protected $total_fee;
-    function __construct($appid, $openid, $mch_id, $key,$out_trade_no,$body,$total_fee) {
+    function __construct($appid, $openid, $mch_id, $key,$out_trade_no,$body,$total_fee,$notify_url) {
         $this->appid = $appid;
         $this->openid = $openid;
         $this->mch_id = $mch_id;
@@ -15,6 +16,7 @@ class WeixinPay {
         $this->out_trade_no = $out_trade_no;
         $this->body = $body;
         $this->total_fee = $total_fee;
+        $this->notify_url = $notify_url;
     }
     public function pay() {
         //统一下单接口
@@ -32,8 +34,7 @@ class WeixinPay {
             'out_trade_no'=> $this->out_trade_no,
             'total_fee' => $this->total_fee * 100, //总金额 单位 分
             'spbill_create_ip' => '192.168.0.161', //终端IP
-            //'notify_url' => 'https://www.alemao.club/bjks/index.php?/Order/notify', //通知地址  确保外网能正常访问
-            'notify_url' => 'http://bijiekaoshi.com/pay/index.php', //通知地址  确保外网能正常访问
+            'notify_url' => $this->notify_url, //通知地址  确保外网能正常访问
             'openid' => $this->openid, //用户id
             'trade_type' => 'JSAPI'//交易类型
         );

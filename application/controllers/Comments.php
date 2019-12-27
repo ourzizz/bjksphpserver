@@ -67,8 +67,12 @@ class Comments extends CI_Controller {
         }
     }
 
-    /*用户删除评论
+    /*用户修改评论
      * */
-    public function delete_comment(){
+    public function update_comment(){
+        $comment_id = $_POST['comment_id'];
+        $content = $_POST['content'];
+        $condition = "comment_id = '$comment_id'";
+        DB::update('file_comment',['content'=>$content],$condition);
     }
 }
