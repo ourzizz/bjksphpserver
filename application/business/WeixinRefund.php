@@ -2,7 +2,8 @@
 
 use \QCloud_WeApp_SDK\Helper\Logger as Logger;
 use \QCloud_WeApp_SDK\Conf as Conf;
-require APPPATH.'business/WeixinPay.php';
+use \QCloud_WeApp_SDK\Myapi\WeixinPay  as WeixinPay;
+//require APPPATH.'business/WeixinPay.php';
 
 class WeixinRefund extends WeiXinPay{
     protected $SSLCERT_PATH ;//证书路径

@@ -150,8 +150,8 @@ class Demo extends CI_Controller {
             $data['files'][$j]['eventtime'] = array();
             while(!empty($eventfile[$i+1]) && $eventfile[$i]['fileid']== $eventfile[$i+1]['fileid'])
             {
-            array_push ($data['files'][$j]['eventtime'],array('event'=>$eventfile[$i]["event"],'startime'=>$eventfile[$i]["startime"]));
-            $i=$i+1;
+                array_push ($data['files'][$j]['eventtime'],array('event'=>$eventfile[$i]["event"],'startime'=>$eventfile[$i]["startime"]));
+                $i=$i+1;
             }
             array_push ($data['files'][$j]['eventtime'],array('event'=>$eventfile[$i]["event"],'startime'=>$eventfile[$i]["startime"]));
             $i=$i+1;
@@ -261,10 +261,10 @@ class Demo extends CI_Controller {
             $res['happening'][$j]['filelist'] = array();
             while(!empty($happening[$i+1]) && $happening[$i]['event']== $happening[$i+1]['event'])
             {
-                array_push($res['happening'][$j]['filelist'],array('endtime'=>$happening[$i]["endtime"],'fileid'=>$happening[$i]['ksfileid'],'filetitle'=>$happening[$i]['filetitle']));
+                array_push($res['happening'][$j]['filelist'],$happening[$i]);
                 $i=$i+1;
             }
-            array_push($res['happening'][$j]['filelist'],array('endtime'=>$happening[$i]["endtime"],'fileid'=>$happening[$i]['ksfileid'],'filetitle'=>$happening[$i]['filetitle']));
+            array_push($res['happening'][$j]['filelist'],$happening[$i]);
             $i=$i+1;
             $j=$j+1;
         }
